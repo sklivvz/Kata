@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kata.Tests", "Kata.Tests\Kata.Tests.csproj", "{74543F53-95CE-4419-9DAB-906BAF182A66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kata", "Kata\Kata.csproj", "{23BB54E4-11FC-4C30-9792-4EBFA2BADCDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23BB54E4-11FC-4C30-9792-4EBFA2BADCDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23BB54E4-11FC-4C30-9792-4EBFA2BADCDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23BB54E4-11FC-4C30-9792-4EBFA2BADCDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23BB54E4-11FC-4C30-9792-4EBFA2BADCDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74543F53-95CE-4419-9DAB-906BAF182A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74543F53-95CE-4419-9DAB-906BAF182A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74543F53-95CE-4419-9DAB-906BAF182A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74543F53-95CE-4419-9DAB-906BAF182A66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Kata.Tests\Kata.Tests.csproj
+	EndGlobalSection
+EndGlobal
