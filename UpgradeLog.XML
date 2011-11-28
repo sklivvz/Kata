@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Kata">
+</Property><Property Name="Solution File" Value="C:\Users\marco.cecconi\git\Kata\Kata.sln">
+</Property><Property Name="Date" Value="28 November 2011">
+</Property><Property Name="Time" Value="12:14">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Kata.sln" Description="File successfully backed up as C:\Users\marco.cecconi\git\Kata\Backup\Kata.sln">
+</Event><Event ErrorLevel="0" Project="Kata.Tests" Source="Kata.Tests\Kata.Tests.csproj" Description="Project file successfully backed up as C:\Users\marco.cecconi\git\Kata\Backup\Kata.Tests\Kata.Tests.csproj">
+</Event><Event ErrorLevel="0" Project="Kata.Tests" Source="Kata.Tests\StringCalculatorTest.cs" Description="File successfully backed up as C:\Users\marco.cecconi\git\Kata\Backup\Kata.Tests\StringCalculatorTest.cs">
+</Event><Event ErrorLevel="1" Project="Kata.Tests" Source="Kata.Tests\Kata.Tests.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="Kata.Tests" Source="Kata.Tests\Kata.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Kata.Tests" Source="Kata.Tests\Kata.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Kata" Source="Kata\Kata.csproj" Description="Project file successfully backed up as C:\Users\marco.cecconi\git\Kata\Backup\Kata\Kata.csproj">
+</Event><Event ErrorLevel="0" Project="Kata" Source="Kata\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\marco.cecconi\git\Kata\Backup\Kata\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Kata" Source="Kata\StringCalculator.cs" Description="File successfully backed up as C:\Users\marco.cecconi\git\Kata\Backup\Kata\StringCalculator.cs">
+</Event><Event ErrorLevel="1" Project="Kata" Source="Kata\Kata.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="Kata" Source="Kata\Kata.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Kata" Source="Kata\Kata.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Kata.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Kata.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Kata.Tests" Source="Kata.Tests\Kata.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Kata" Source="Kata\Kata.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
