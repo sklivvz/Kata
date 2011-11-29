@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Kata
 {
@@ -17,37 +18,95 @@ namespace Kata
         {
             get
             {
-                decimal ret = 0M;
-                while (_cart.Count > 0)
+                var books = new List<string>();
+                foreach (string book in _cart.Keys)
                 {
-                    if (_cart.Count == 5)
-                    {
-                        TakeDifferent(5);
-                        ret += 8M * 5 * 0.75M;
-                    }
-                    else if (_cart.Count == 4)
-                    {
-                        TakeDifferent(4);
-                        ret += 8M * 4 * 0.8M;
-                    }
-                    else if (_cart.Count == 3)
-                    {
-                        TakeDifferent(3);
-                        ret += 8M*3*0.9M;
-                    }
-                    else if (_cart.Count == 2)
-                    {
-                        TakeDifferent(2);
-                        ret += 8M * 2 * 0.95M;
-                    }
-                    else
-                    {
-                        TakeDifferent(1);
-                        ret += 8M;
-                    }
+                    for (int i=0; i<_cart[book]; i++)
+                        books.Add(book);
                 }
-                return ret;
+                return GetBestPriceFor(books);
             }
+        }
+
+        private decimal GetBestPriceFor(List<string> books)
+        {
+            int distinct = books.Distinct().Count();
+            if (distinct == 1)
+            {
+                return 8m*books.Count;
+            }
+            if (distinct == 2)
+            {
+                string first = books[0];
+                string second = books.First(x => x != first);
+
+                books.Remove(first);
+                books.Remove(second);
+
+                if (books.Count == 0)
+                    return 8M*2*0.95M;
+
+                return 8M*2*0.95M + GetBestPriceFor(books);
+            }
+            if (distinct == 3)
+            {
+                string first = books[0];
+                string second = books.First(x => x != first);
+                string third = books.First(x => x != first && x!= second);
+
+                books.Remove(first);
+                books.Remove(second);
+                books.Remove(third);
+
+                if (books.Count == 0)
+                    return 8M * 3 * 0.9M;
+
+                return 8M * 3 * 0.9M + GetBestPriceFor(books);
+            }
+            if (distinct == 4)
+            {
+                string first = books[0];
+                string second = books.First(x => x != first);
+                string third = books.First(x => x != first && x != second);
+                string fourth = books.First(x => x != first && x != second && x != third);
+
+                books.Remove(first);
+                books.Remove(second);
+                books.Remove(third);
+                books.Remove(fourth);
+
+                if (books.Count == 0)
+                    return 8M * 4 * 0.8M;
+
+                return 8M * 4 * 0.8M + GetBestPriceFor(books);
+            }
+
+            var altBooks1 = new List<string>(books);
+
+            foreach (string book in books.Distinct())
+            {
+                altBooks1.Remove(book);
+            }
+            decimal bestPrice = 8M*5*0.75M;
+            if (altBooks1.Count>0)
+                bestPrice += GetBestPriceFor(altBooks1);
+
+            foreach (string bookToKeep in books.Distinct())
+            {
+                var altBooks2 = new List<string>(books.ToArray());
+                foreach (string bookToRemove in books.Distinct())
+                {
+                    if (bookToRemove!=bookToKeep)
+                        altBooks2.Remove(bookToRemove);
+                }
+                var testPrice = GetBestPriceFor(altBooks2) + 8M*4*0.8M;
+                if (testPrice < bestPrice)
+                    bestPrice = testPrice;
+            }
+
+            return bestPrice;
+
+
         }
 
         private void TakeDifferent(int howMany)

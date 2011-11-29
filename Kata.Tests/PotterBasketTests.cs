@@ -137,6 +137,23 @@ namespace Kata.Tests
             Assert.AreEqual(8M * 5 * 0.75M, basket.Total);
         }
 
+        [Test]
+        public void HowMuchDoesThisBasketOfBooksCost()
+        {
+            var basket = SetupBasket();
+
+            basket.Add("Harry Potter and the Philosopher's Stone");
+            basket.Add("Harry Potter and the Philosopher's Stone");
+            basket.Add("Harry Potter and the Chamber of Secrets");
+            basket.Add("Harry Potter and the Chamber of Secrets");
+            basket.Add("Harry Potter and the Prisoner of Azkaban");
+            basket.Add("Harry Potter and the Prisoner of Azkaban");
+            basket.Add("Harry Potter and the Goblet of Fire");
+            basket.Add("Harry Potter and the Order of the Phoenix");
+
+            Assert.AreEqual(51.20M, basket.Total);
+        }
+
         private PotterBasket SetupBasket()
         {
             var basket = new PotterBasket();
