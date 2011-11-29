@@ -12,19 +12,13 @@ namespace Kata
     /// </summary>
     public class PotterBasket
     {
-        private readonly Dictionary<string, int> _cart = new Dictionary<string, int>();
+        private readonly List<string> _books = new List<string>();
 
         public decimal Total
         {
             get
             {
-                var books = new List<string>();
-                foreach (string book in _cart.Keys)
-                {
-                    for (int i=0; i<_cart[book]; i++)
-                        books.Add(book);
-                }
-                return GetBestPriceFor(books);
+                return GetBestPriceFor(_books);
             }
         }
 
@@ -33,7 +27,7 @@ namespace Kata
             int distinct = books.Distinct().Count();
             if (distinct == 1)
             {
-                return 8m*books.Count;
+                return 8m * books.Count;
             }
             if (distinct == 2)
             {
@@ -44,15 +38,15 @@ namespace Kata
                 books.Remove(second);
 
                 if (books.Count == 0)
-                    return 8M*2*0.95M;
+                    return 8M * 2 * 0.95M;
 
-                return 8M*2*0.95M + GetBestPriceFor(books);
+                return 8M * 2 * 0.95M + GetBestPriceFor(books);
             }
             if (distinct == 3)
             {
                 string first = books[0];
                 string second = books.First(x => x != first);
-                string third = books.First(x => x != first && x!= second);
+                string third = books.First(x => x != first && x != second);
 
                 books.Remove(first);
                 books.Remove(second);
@@ -81,67 +75,30 @@ namespace Kata
                 return 8M * 4 * 0.8M + GetBestPriceFor(books);
             }
 
-            var altBooks1 = new List<string>(books);
-
+            var booksLeftWhenTakingFive = new List<string>(books);
             foreach (string book in books.Distinct())
             {
-                altBooks1.Remove(book);
+                booksLeftWhenTakingFive.Remove(book);
             }
-            decimal bestPrice = 8M*5*0.75M;
-            if (altBooks1.Count>0)
-                bestPrice += GetBestPriceFor(altBooks1);
 
-            foreach (string bookToKeep in books.Distinct())
+            
+            if (booksLeftWhenTakingFive.Count > 0)
             {
-                var altBooks2 = new List<string>(books.ToArray());
-                foreach (string bookToRemove in books.Distinct())
-                {
-                    if (bookToRemove!=bookToKeep)
-                        altBooks2.Remove(bookToRemove);
-                }
-                var testPrice = GetBestPriceFor(altBooks2) + 8M*4*0.8M;
-                if (testPrice < bestPrice)
-                    bestPrice = testPrice;
+                var booksLeftWhenTakingFiveCopy = new List<string>(booksLeftWhenTakingFive);
+                return books
+                    .Distinct()
+                    .Select(bookToKeep => new List<string>(booksLeftWhenTakingFiveCopy) { bookToKeep })
+                    .Select(altBooks3 => GetBestPriceFor(altBooks3) + 8M*4*0.8M)
+                    .Concat(new[] { 8M * 5 * 0.75M + GetBestPriceFor(booksLeftWhenTakingFive) }).Min();
             }
 
-            return bestPrice;
-
-
+            return 8M * 5 * 0.75M;
         }
 
-        private void TakeDifferent(int howMany)
-        {
-            var books = BooksInCart;
-            for (int i = 0; i < howMany; i++)
-            {
-                Remove(books[i]);
-            }
-        }
-
-
-        private string[] BooksInCart
-        {
-            get
-            {
-                var keys = new string[_cart.Count];
-                _cart.Keys.CopyTo(keys, 0);
-                return keys;
-            }
-        }
-
-        private void Remove(string book)
-        {
-            _cart[book]--;
-            if (_cart[book] == 0)
-                _cart.Remove(book);
-        }
 
         public void Add(string book)
         {
-            if (_cart.ContainsKey(book))
-                _cart[book]++;
-            else
-                _cart[book] = 1;
+            _books.Add(book);
         }
     }
 }
