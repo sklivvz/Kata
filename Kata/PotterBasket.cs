@@ -20,26 +20,29 @@ namespace Kata
                 decimal ret = 0M;
                 while (_cart.Count > 0)
                 {
-                    var first = PopFirstElement();
-                    var second = FindDifferent(first);
-
-                    if (second != string.Empty)
+                    if (_cart.Count == 5)
                     {
-                        Remove(second);
-
-                        var third = FindDifferent(first, second);
-                        if (third != string.Empty)
-                        {
-                            Remove(third);
-                            ret += 8M*3*0.9M;
-                        }
-                        else
-                        {
-                            ret += 8M*2*0.95M;
-                        }
+                        TakeDifferent(5);
+                        ret += 8M * 5 * 0.75M;
+                    }
+                    else if (_cart.Count == 4)
+                    {
+                        TakeDifferent(4);
+                        ret += 8M * 4 * 0.8M;
+                    }
+                    else if (_cart.Count == 3)
+                    {
+                        TakeDifferent(3);
+                        ret += 8M*3*0.9M;
+                    }
+                    else if (_cart.Count == 2)
+                    {
+                        TakeDifferent(2);
+                        ret += 8M * 2 * 0.95M;
                     }
                     else
                     {
+                        TakeDifferent(1);
                         ret += 8M;
                     }
                 }
@@ -47,47 +50,24 @@ namespace Kata
             }
         }
 
-        private string FindDifferent(string book1, string book2)
+        private void TakeDifferent(int howMany)
         {
-            string next = string.Empty;
-
-            foreach (string key in _cart.Keys)
+            var books = BooksInCart;
+            for (int i = 0; i < howMany; i++)
             {
-                if (key == book1) continue;
-                if (key == book2) continue;
-                next = key;
-                break;
+                Remove(books[i]);
             }
-            return next;
         }
 
-        private string FindDifferent(string book)
-        {
-            string next = string.Empty;
 
-            foreach (string key in _cart.Keys)
+        private string[] BooksInCart
+        {
+            get
             {
-                if (key == book) continue;
-                next = key;
-                break;
+                var keys = new string[_cart.Count];
+                _cart.Keys.CopyTo(keys, 0);
+                return keys;
             }
-            return next;
-        }
-
-        private string[] BooksInCart()
-        {
-            var keys = new string[_cart.Count];
-            _cart.Keys.CopyTo(keys, 0);
-            return keys;
-        }
-
-        private string PopFirstElement()
-        {
-            string firstElement = BooksInCart()[0];
-
-            Remove(firstElement);
-
-            return firstElement;
         }
 
         private void Remove(string book)
