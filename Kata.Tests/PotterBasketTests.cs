@@ -8,27 +8,27 @@ namespace Kata.Tests
     [TestFixture]
     public class PotterBasketTests
     {
-        private PotterBasket SetupBasket()
+        private PotterBasket _potterBasket;
+
+        [SetUp]
+        protected void SetUp()
         {
-            var basket = new PotterBasket();
-            return basket;
+            _potterBasket = new PotterBasket();
         }
 
         [Test]
         public void HowMuchDoesThisBasketOfBooksCost()
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add("Harry Potter and the Philosopher's Stone");
+            _potterBasket.Add("Harry Potter and the Philosopher's Stone");
+            _potterBasket.Add("Harry Potter and the Chamber of Secrets");
+            _potterBasket.Add("Harry Potter and the Chamber of Secrets");
+            _potterBasket.Add("Harry Potter and the Prisoner of Azkaban");
+            _potterBasket.Add("Harry Potter and the Prisoner of Azkaban");
+            _potterBasket.Add("Harry Potter and the Goblet of Fire");
+            _potterBasket.Add("Harry Potter and the Order of the Phoenix");
 
-            basket.Add("Harry Potter and the Philosopher's Stone");
-            basket.Add("Harry Potter and the Philosopher's Stone");
-            basket.Add("Harry Potter and the Chamber of Secrets");
-            basket.Add("Harry Potter and the Chamber of Secrets");
-            basket.Add("Harry Potter and the Prisoner of Azkaban");
-            basket.Add("Harry Potter and the Prisoner of Azkaban");
-            basket.Add("Harry Potter and the Goblet of Fire");
-            basket.Add("Harry Potter and the Order of the Phoenix");
-
-            Assert.AreEqual(51.20M, basket.Total);
+            Assert.AreEqual(51.20M, _potterBasket.Total);
         }
 
         [Test]
@@ -38,15 +38,13 @@ namespace Kata.Tests
         public void IfYouBuyAll5YouGetAHuge25PercentDiscount(string book1, string book2, string book3, string book4,
                                                              string book5)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book1);
+            _potterBasket.Add(book2);
+            _potterBasket.Add(book3);
+            _potterBasket.Add(book4);
+            _potterBasket.Add(book5);
 
-            basket.Add(book1);
-            basket.Add(book2);
-            basket.Add(book3);
-            basket.Add(book4);
-            basket.Add(book5);
-
-            Assert.AreEqual(8M*5*0.75M, basket.Total);
+            Assert.AreEqual(8M * 5 * 0.75M, _potterBasket.Total);
         }
 
         [Test]
@@ -59,13 +57,11 @@ namespace Kata.Tests
         public void IfYouBuyThreeDifferentBooksYouGetA10PercentDiscountOnThoseThreeBooks(string book1, string book2,
                                                                                          string book3)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book1);
+            _potterBasket.Add(book2);
+            _potterBasket.Add(book3);
 
-            basket.Add(book1);
-            basket.Add(book2);
-            basket.Add(book3);
-
-            Assert.AreEqual(8M*3*0.9M, basket.Total);
+            Assert.AreEqual(8M * 3 * 0.9M, _potterBasket.Total);
         }
 
         [Test]
@@ -76,14 +72,12 @@ namespace Kata.Tests
         public void IfYouBuyTwoCopiesOfTwoDifferentBooksYouGetA5PercentDiscountOnThoseTwoBooksTwice(string book1,
                                                                                                     string book2)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book1);
+            _potterBasket.Add(book2);
+            _potterBasket.Add(book2);
+            _potterBasket.Add(book1);
 
-            basket.Add(book1);
-            basket.Add(book2);
-            basket.Add(book2);
-            basket.Add(book1);
-
-            Assert.AreEqual(8M*4*0.95M, basket.Total);
+            Assert.AreEqual(8M * 4 * 0.95M, _potterBasket.Total);
         }
 
         [Test]
@@ -93,12 +87,10 @@ namespace Kata.Tests
         [TestCase("Harry Potter and the Order of the Phoenix", "Harry Potter and the Philosopher's Stone")]
         public void IfYouBuyTwoDifferentBooksYouGetA5PercentDiscountOnThoseTwoBooks(string book1, string book2)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book1);
+            _potterBasket.Add(book2);
 
-            basket.Add(book1);
-            basket.Add(book2);
-
-            Assert.AreEqual(8M*2*0.95M, basket.Total);
+            Assert.AreEqual(8M * 2 * 0.95M, _potterBasket.Total);
         }
 
 
@@ -109,13 +101,11 @@ namespace Kata.Tests
         [TestCase("Harry Potter and the Order of the Phoenix", "Harry Potter and the Philosopher's Stone")]
         public void IfYouBuyTwoDifferentBooksYouGetA5PercentDiscountOnThoseTwoBooksOnly(string book1, string book2)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book1);
+            _potterBasket.Add(book2);
+            _potterBasket.Add(book1);
 
-            basket.Add(book1);
-            basket.Add(book2);
-            basket.Add(book1);
-
-            Assert.AreEqual(8M*2*0.95M + 8M, basket.Total);
+            Assert.AreEqual(8M * 2 * 0.95M + 8M, _potterBasket.Total);
         }
 
         [Test]
@@ -126,11 +116,9 @@ namespace Kata.Tests
         [TestCase("Harry Potter and the Order of the Phoenix")]
         public void OneCopyOfAnyOfTheFiveBooksCosts8Eur(string book)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book);
 
-            basket.Add(book);
-
-            Assert.AreEqual(8M, basket.Total);
+            Assert.AreEqual(8M, _potterBasket.Total);
         }
 
         [Test]
@@ -141,12 +129,10 @@ namespace Kata.Tests
         [TestCase("Harry Potter and the Order of the Phoenix")]
         public void TwoCopiesOfTheSameBookCosts16Eur(string book)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book);
+            _potterBasket.Add(book);
 
-            basket.Add(book);
-            basket.Add(book);
-
-            Assert.AreEqual(16M, basket.Total);
+            Assert.AreEqual(16M, _potterBasket.Total);
         }
 
         [Test]
@@ -156,14 +142,12 @@ namespace Kata.Tests
             "Harry Potter and the Order of the Phoenix", "Harry Potter and the Philosopher's Stone")]
         public void With4DifferentBooksYouGetA20PercentDiscount(string book1, string book2, string book3, string book4)
         {
-            PotterBasket basket = SetupBasket();
+            _potterBasket.Add(book1);
+            _potterBasket.Add(book2);
+            _potterBasket.Add(book3);
+            _potterBasket.Add(book4);
 
-            basket.Add(book1);
-            basket.Add(book2);
-            basket.Add(book3);
-            basket.Add(book4);
-
-            Assert.AreEqual(8M*4*0.8M, basket.Total);
+            Assert.AreEqual(8M * 4 * 0.8M, _potterBasket.Total);
         }
     }
 }
