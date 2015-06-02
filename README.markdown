@@ -1,6 +1,6 @@
 #What is this project
 
-This project contains the source code of some [Katas](http://en.wikipedia.org/wiki/Kata_(programming).
+This project contains the source code of some [Katas](http://en.wikipedia.org/wiki/Kata_(programming)).
 
 ##What Kata are solved in this project?
 
